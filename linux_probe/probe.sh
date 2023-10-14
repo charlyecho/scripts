@@ -3,7 +3,7 @@
 #return json probe data from a linux based server
 
 #list of systemd you want to monitor
-systemd_services='mysql\|fpm\|apache\|pm2\|mariadb\|nginx'
+systemd_services='mysql\|fpm\|apache\|pm2\|mariadb\|nginx\|caddy'
 
 # script
 # ===================
@@ -14,7 +14,7 @@ echo "{"
 echo "   "\"name\" : \"$(hostname)\",
 
 # system
-echo "   "\"system\" : \"$(hostnamectl | grep 'Operating System')\",
+echo "   "\"system\" : \"$(hostnamectl | grep 'Operating System: ' | cut -d ":" -f2 | awk '{$1=$1};1')\",
 
 # uptime
 echo "   "\"uptime\" : \"$(uptime -p)\",
@@ -30,13 +30,13 @@ fi
 echo "   "\"root_space_left\" : \"$(df -h / | grep / | awk '{print $4}')\",
 
 # Get the current usage of CPU and memory
-echo "   "\"cpu\" : \"$(top -bn1 | awk '/Cpu/ {print $2}')%\",
+echo "   "\"cpu_percent\" : \"$(top -bn1 | awk '/Cpu/ {print $2}')\",
 
 # RAM
-echo "   "\"ram\" : \"$(free | grep Mem | awk '{print int($3/$2 * 100)}')%\",
+echo "   "\"ram_percent\" : \"$(free | grep Mem | awk '{print int($3/$2 * 100)}')\",
 
-# swap
-echo "   "\"swap\" : \"$(free | grep Swap | awk '{print int($3/$2 * 100)}')%\",
+# Swap
+echo "   "\"swap_percent\" : \"$(free | grep Swap | awk '{print int($3/$2 * 100)}')\",
 
 # systemd
 systemd_list=$(systemctl list-units | awk '{print $1;}' | grep $systemd_services | xargs)
