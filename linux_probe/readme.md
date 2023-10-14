@@ -33,10 +33,10 @@ or
    "cpu" : "1.5%",
    "ram" : "3%",
    "swap" : "2%",
-   "mysql" : "active",
-   "nginx" : "active",
-   "php7.4-fpm" : "active",
-   "php8.2-fpm" : "active",
+   "mysql.service" : "active",
+   "nginx.service" : "active",
+   "php7.4-fpm.service" : "active",
+   "php8.2-fpm.service" : "active",
    "date" : "2023-10-14T01:49:51-0400"
 }
 ```
