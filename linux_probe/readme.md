@@ -9,17 +9,17 @@ A KISS script to generate a json of a linux based server status
 
 2. Make the file executable
 
-> chmod +x monitor.sh
+> chmod +x probe.sh
 
 ## Execution
 
 execute the script to get the json data
 
-> ./monitor.sh
+> ./probe.sh
 
 or
 
-> sh /path/to/the/script/monitor.sh
+> sh /path/to/the/script/probe.sh
 
 ## Sample response
 
@@ -28,6 +28,7 @@ or
    "name" : "my-server",
    "system" : "Ubuntu 20.04.6 LTS",
    "uptime" : "up 2 weeks, 2 days, 1 hour, 44 minutes",
+   "reboot_needed" : "false",
    "root space left" : "2.5T",
    "cpu" : "1.5%",
    "ram" : "3%",
@@ -44,7 +45,6 @@ or
 
 you can execute it in a cronjob to write a file like so
 
-> ./monitor.sh > status.json
+> sh /path/to/probe.sh > status.json
 
-and you can serve it via a http server or acces it via ssh
-
+and you can serve it via a http server or get it via ssh
