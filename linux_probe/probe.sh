@@ -3,7 +3,7 @@
 #return json probe data from a linux based server
 
 #list of systemd you want to monitor
-systemd_services='mysql\|fpm\|apache\|pm2\|mariadb\|nginx\|caddy'
+systemd_services='mysql\|fpm\|apache\|pm2\|mariadb\|nginx\|caddy\|redis-server\|memcached'
 
 # script
 # ===================
