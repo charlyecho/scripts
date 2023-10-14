@@ -27,7 +27,7 @@ else
 fi
 
 # size left, may not be acurate because of mounting points
-echo "   "\"root space left\" : \"$(df -h / | grep / | awk '{print $4}')\",
+echo "   "\"root_space_left\" : \"$(df -h / | grep / | awk '{print $4}')\",
 
 # Get the current usage of CPU and memory
 echo "   "\"cpu\" : \"$(top -bn1 | awk '/Cpu/ {print $2}')%\",
