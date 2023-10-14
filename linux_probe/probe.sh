@@ -14,10 +14,10 @@ echo "{"
 echo "   "\"name\" : \"$(hostname)\",
 
 # system
-echo "   "\"system\" : \"$(hostnamectl | grep 'Operating System: ' | cut -d ":" -f2 | awk '{$1=$1};1')\",
+echo "   "\"system\" : \"$(hostnamectl | grep 'Operating System' | cut -d ":" -f2 | awk '{$1=$1};1')\",
 
 # Kernel
-echo "   "\"kernel\" : \"$(hostnamectl | grep 'Kernel: ' | cut -d ":" -f2 | awk '{$1=$1};1')\",
+echo "   "\"kernel\" : \"$(hostnamectl | grep 'Kernel' | cut -d ":" -f2 | awk '{$1=$1};1')\",
 
 # uptime
 echo "   "\"uptime\" : \"$(uptime -p)\",
