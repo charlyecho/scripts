@@ -24,22 +24,22 @@ echo "   "\"uptime\" : \"$(uptime -p)\",
 
 # reboot needed
 if test -f "/var/run/reboot-required"; then
-    echo "   "\"reboot_needed\" : \"true\",
+    echo "   "\"reboot_needed\" : true,
 else
-    echo "   "\"reboot_needed\" : \"false\",
+    echo "   "\"reboot_needed\" : false,
 fi
 
 # size left, may not be acurate because of mounting points
 echo "   "\"root_space_left\" : \"$(df -h / | grep / | awk '{print $4}')\",
 
 # Get the current usage of CPU and memory
-echo "   "\"cpu_percent\" : \"$(top -bn1 | awk '/Cpu/ {print $2}')\",
+echo "   "\"cpu_percent\" : $(top -bn1 | awk '/Cpu/ {print $2}'),
 
 # RAM
-echo "   "\"ram_percent\" : \"$(free | grep Mem | awk '{print int($3/$2 * 100)}')\",
+echo "   "\"ram_percent\" : $(free | grep Mem | awk '{print ($2 ? int($3/$2 * 100) : null)}'),
 
 # Swap
-echo "   "\"swap_percent\" : \"$(free | grep Swap | awk '{print int($3/$2 * 100)}')\",
+echo "   "\"swap_percent\" : $(free | grep Swap | awk '{print ($2 ? int($3/$2 * 100) : null)}'),
 
 # systemd
 systemd_list=$(systemctl list-units | awk '{print $1;}' | grep $systemd_services | xargs)
