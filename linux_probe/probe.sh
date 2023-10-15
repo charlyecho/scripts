@@ -36,10 +36,10 @@ echo "   "\"root_space_left\" : \"$(df -h / | grep / | awk '{print $4}')\",
 echo "   "\"cpu_percent\" : $(top -bn1 | awk '/Cpu/ {print $2}'),
 
 # RAM
-echo "   "\"ram_percent\" : $(free | grep Mem | awk '{print ($2 ? int($3/$2 * 100) : null)}'),
+echo "   "\"ram_percent\" : $(free | grep Mem | awk '{print ($2 ? int($3/$2 * 100) : -1)}'),
 
 # Swap
-echo "   "\"swap_percent\" : $(free | grep Swap | awk '{print ($2 ? int($3/$2 * 100) : null)}'),
+echo "   "\"swap_percent\" : $(free | grep Swap | awk '{print ($2 ? int($3/$2 * 100) : -1)}'),
 
 # systemd
 systemd_list=$(systemctl list-units | awk '{print $1;}' | grep $systemd_services | xargs)
