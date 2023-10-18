@@ -14,7 +14,7 @@ echo "{"
 echo "   "\"name\" : \"$(cat /etc/hostname)\",
 
 # system
-echo "   "\"system\" : \"$(cat /etc/os-release | grep 'PRETTY_NAME=' | cut -d "=" -f2 | awk '{$1=$1};1')\",
+echo "   "\"system\" : $(cat /etc/os-release | grep 'PRETTY_NAME=' | cut -d "=" -f2 | awk '{$1=$1};1'),
 
 # Kernel
 echo "   "\"kernel\" : \"$(uname -r)\",
