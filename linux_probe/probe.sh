@@ -32,6 +32,9 @@ fi
 # size left, may not be acurate because of mounting points
 echo "   "\"root_space_left\" : \"$(df -h / | grep / | awk '{print $4}')\",
 
+# root space left percent
+echo "   "\"root_space_left_percent\" : \"$(df -h / | grep / | awk '{print $5}' | cut -d "%" -f1)\",
+
 # Get the current usage of CPU and memory
 echo "   "\"cpu_percent\" : $(top -bn1 | awk '/Cpu/ {print $2}'),
 
